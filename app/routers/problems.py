@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.core.types import unordered_map
-from app.models.problem import Diffiulty, Problem
+from app.models.problem import Difficulty, Problem
 
 router = APIRouter(prefix="/problems", tags=["Problems"])
 
@@ -20,12 +20,12 @@ async def add_problem(problem: Problem):
 
 
 @router.get("/")
-async def search_problems(difficulty: Diffiulty | None = None):
+async def search_problems(difficulty: Difficulty | None = None):
     """
     Docstring for search_problems
 
     :param difficulty: Description
-    :type difficulty: Diffiulty | None
+    :type difficulty: Difficulty | None
 
     Search for problems in unordered_map.
     Time: O(N) for filtering

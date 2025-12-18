@@ -36,6 +36,7 @@ dependencies = [
     "rignore==0.7.6",
     "sentry-sdk==2.48.0",
     "shellingham==1.5.4",
+    "sqlmodel>=0.0.27",
     "starlette==0.50.0",
     "typer==0.20.0",
     "typing-extensions==4.15.0",
