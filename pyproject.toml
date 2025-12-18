@@ -46,3 +46,40 @@ dependencies = [
     "watchfiles==1.1.1",
     "websockets==15.0.1",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.9",
+]
+
+[tool.ruff]
+# The version of the Python interpreter you are targeting
+target-version = "py313"
+# The maximum length of a line before the formatter wraps it
+line-length = 88
+
+[tool.ruff.lint]
+# "select" defines the rulesets to enable.
+# E/W: Error and Warning (standard PEP 8)
+# F: Pyflakes (logic errors)
+# UP: pyupgrade (modernizes your syntax automatically)
+# B: flake8-bugbear (catches likely bugs)
+# I: isort (organizes your imports)
+select = ["E", "F", "UP", "B", "I"]
+
+# Rules to explicitly skip
+ignore = [
+    "E501", # Ignore line-length violations (the formatter handles this)
+    "B008", # Allow function calls in default arguments (common in FastAPI)
+]
+
+[tool.ruff.lint.isort]
+# Ensures imports are grouped logically
+combine-as-imports = true
+force-wrap-aliases = true
+
+[tool.ruff.format]
+# Use double quotes for strings, which is the standard for modern Python
+quote-style = "double"
+# Ensure indentation is consistent
+indent-style = "space"
