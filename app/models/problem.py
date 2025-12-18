@@ -4,7 +4,7 @@ from enum import Enum
 class Diffiulty(str, Enum):
     EASY = "Easy"
     MEDIUM = "Medium"
-    DIFFICULT = "Diffiult" # I am adding "difficult" for now, I may change it later.
+    DIFFICULT = "Difficult" # I am adding "difficult" for now, I may change it later.
 
 class Problem(BaseModel):
     id: int
