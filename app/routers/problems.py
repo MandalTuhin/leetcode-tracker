@@ -1,32 +1,54 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, select
 
 from app.core.database import get_session
-from app.core.types import unordered_map
 from app.models.problem import Problem, ProblemCreate
 
 router = APIRouter(prefix="/problems", tags=["Problems"])
 
-db: unordered_map[int, Problem] = {}
 
-
-@router.post("/", response_model=Problem)
+@router.post("/", response_model=Problem, status_code=status.HTTP_201_CREATED)
 async def create_problem(
     problem_data: ProblemCreate, session: Session = Depends(get_session)
 ):
-    # Call model_validate on the Problem CLASS, passing the data instance
-    db_problem = Problem.model_validate(problem_data)
+    dB_problem = Problem.model_validate(problem_data)
 
-    session.add(db_problem)
-    session.commit()
-    session.refresh(db_problem)
-    return db_problem
+    try:
+        session.add(dB_problem)
+        session.commit()
+        session.refresh(dB_problem)
+    except IntegrityError:
+        session.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Problem number {problem_data.problem_no} already exists.",
+        )
+    return dB_problem
 
 
 @router.get("/", response_model=list[Problem])
 async def read_problems(session: Session = Depends(get_session)):
     problems = session.exec(select(Problem)).all()
     return problems
+
+
+@router.get("/{problem_id}", response_model=Problem)
+async def read_problem(problem_id: int, session: Session = Depends(get_session)):
+    """
+    Fetch a single LeetCode problem by its internal database ID.
+    """
+
+    # session.get() is the most efficient way to find a row by its primary key.
+    problem = session.get(Problem, problem_id)
+
+    if not problem:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Problem with ID {problem_id} not found",
+        )
+
+    return problem
 
 
 # @router.get("/")
