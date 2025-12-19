@@ -51,6 +51,19 @@ async def read_problem(problem_id: int, session: Session = Depends(get_session))
     return problem
 
 
+@router.delete("/{problem_id}")
+async def delete_problem(problem_id: int, session: Session = Depends(get_session)):
+    dB_problem = session.get(Problem, problem_id)
+
+    if not dB_problem:
+        raise HTTPException(
+            status_code=404, detail=f"Problem with ID {problem_id} not found"
+        )
+    session.delete(dB_problem)
+    session.commit()
+    return {"ok": True}
+
+
 # @router.get("/")
 # async def search_problems(difficulty: Difficulty | None = None):
 #     """
