@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, select
 
 from app.core.database import get_session
-from app.models.problem import Problem, ProblemCreate
+from app.models.problem import Problem, ProblemCreate, ProblemUpdate
 
 router = APIRouter(prefix="/problems", tags=["Problems"])
 
@@ -49,6 +49,29 @@ async def read_problem(problem_id: int, session: Session = Depends(get_session))
         )
 
     return problem
+
+
+@router.patch("/{problem_id}", response_model=Problem)
+async def update_problem(
+    problem_id: int,
+    problem_update: ProblemUpdate,
+    session: Session = Depends(get_session),
+):
+    dB_problem = session.get(Problem, problem_id)
+    if not dB_problem:
+        raise HTTPException(
+            status_code=404, detail=f"Problem ID {problem_id} not found."
+        )
+
+    update_data = problem_update.model_dump(exclude_unset=True)
+
+    # Update only the provided fields
+    dB_problem.sqlmodel_update(update_data)
+
+    session.add(dB_problem)
+    session.commit()
+    session.refresh(dB_problem)
+    return dB_problem
 
 
 @router.delete("/{problem_id}")
