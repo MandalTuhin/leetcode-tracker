@@ -20,6 +20,8 @@ The **LeetCode Tracker API** enables users to log problems, store solutions (C++
 The API is globally accessible and documented via Swagger UI:
 [Interactive API Documentation](https://leetcode-tracker-api.onrender.com/docs)
 
+_Note: As this is hosted on a free tier, the initial request may take 30-60 seconds to resolve if the instance is currently spun down._
+
 ## 🛠 Tech Stack
 
 - **Framework**: FastAPI (Python 3.10+)
