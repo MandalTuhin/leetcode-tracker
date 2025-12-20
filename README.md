@@ -76,6 +76,10 @@ This project uses **uv** for dependency management to ensure fast and reliable e
 
 This API was developed to document my journey of solving **216 LeetCode problems**. By applying backend engineering principles to my algorithmic practice, I aim to demonstrate a comprehensive understanding of both software design and problem-solving logic.
 
+## 📄 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
 ---
 
 **Professional Note:** This project demonstrates proficiency in FastAPI, Pydantic, and modern Python tooling (uv). It showcases an ability to transition from theoretical computer science to practical, production-ready software development.
