@@ -74,7 +74,7 @@ This project uses **uv** for dependency management to ensure fast and reliable e
 3. **Run the server:**
 
    ```bash
-   uv run uvicorn main:app --reload
+   uv run uvicorn app.main:app --reload
    ```
 
 4. Access Documentation: Open `http://127.0.0.1:8000/docs` to view the interactive Swagger UI.
