@@ -1,6 +1,9 @@
 import os
 
+from dotenv import load_dotenv
 from sqlmodel import Session, SQLModel, create_engine
+
+load_dotenv()
 
 # Use the mount point path defined in Railway (/app/data)
 # Fallback to local 'database.db' if the environment variable is not set

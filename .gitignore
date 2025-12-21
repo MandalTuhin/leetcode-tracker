@@ -31,3 +31,6 @@ database.db
 # macOS
 .DS_Store
 
+# Environment Variables
+.env
+.env.local
