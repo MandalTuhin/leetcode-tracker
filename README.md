@@ -83,6 +83,16 @@ This project uses **uv** for dependency management to ensure fast and reliable e
 
 This API was developed to document my journey of solving **216 LeetCode problems**. By applying backend engineering principles to my algorithmic practice, I aim to demonstrate a comprehensive understanding of both software design and problem-solving logic.
 
+## 🚀 Future Roadmap
+
+The following features are planned for subsequent iterations to enhance security and scalability:
+
+- [ ] **Identity & Access Management**: Implementation of OAuth2 with JWT (JSON Web Tokens) for secure, stateless user authentication.
+- [ ] **Cloud Migration**: Transitioning the data layer to a managed PostgreSQL instance for increased relational durability.
+- [ ] **Advanced User-State Management**: Transitioning from local SQLite sessions to a distributed caching layer (Redis) for session persistence.
+- [ ] **Rate Limiting**: Implementation of API throttling strategies to prevent abuse and ensure service stability.
+- [ ] **Frontend Integration**: Development of a Svelte-based dashboard for visual progress analytics.
+
 ## 📄 License
 
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
