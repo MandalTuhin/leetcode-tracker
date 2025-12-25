@@ -18,12 +18,12 @@ async def create_problem(
         session.add(dB_problem)
         session.commit()
         session.refresh(dB_problem)
-    except IntegrityError:
+    except IntegrityError as e:
         session.rollback()
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Problem number {problem_data.problem_no} already exists.",
-        )
+        ) from e  # Resolved B904
     return dB_problem
 
 
