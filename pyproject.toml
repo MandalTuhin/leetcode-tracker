@@ -86,3 +86,7 @@ force-wrap-aliases = true
 quote-style = "double"
 # Ensure indentation is consistent
 indent-style = "space"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
